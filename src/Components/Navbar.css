@@ -1,0 +1,29 @@
+.nav-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.logo-container {
+    display: flex;
+}
+
+.menu-container {
+    display: flex;
+       
+}
+
+.menu-links {
+    display:flex;
+    padding-left: 20%;
+}
+
+@media screen and  (max-width: 380px) {
+
+.menu-container {
+    padding-right: 15px;
+}
+
+.menu-links {
+    padding-left: 2%;
+}
+}
