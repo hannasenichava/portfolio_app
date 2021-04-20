@@ -17,13 +17,21 @@
     padding-left: 20%;
 }
 
+.toggle-btn {
+    display:none;
+}
 @media screen and  (max-width: 380px) {
 
 .menu-container {
     padding-right: 15px;
+    display: none;
 }
 
 .menu-links {
     padding-left: 2%;
+}
+.toggle-btn {
+    display:flex;
+    align-items: flex-start;
 }
 }
