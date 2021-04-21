@@ -1,31 +1,82 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AiOutlineMenu } from 'react-icons/ai';
-import './Navbar.css'
+import './Navbar.css';
+import Dropdown from './Dropdown';
 
 function Navbar() {
+    const [click, setClick] = useState(false);
+    const [dropdown, setDropdown] = useState(false);
+
+    const handleClick = () => setClick(!click);
+    const closeMobileMenu = () => setClick(false);
+
+    const onMouseEnter = () => {
+        if (window.innerWidth < 960) {
+            setDropdown(false);
+        } else {
+            setDropdown(true);
+        }
+    };
+
+    const onMouseLeave = () => {
+        if (window.innerWidth < 960) {
+            setDropdown(false);
+        } else {
+            setDropdown(false);
+        }
+    };
+
     return (
-        <div className='nav-container'>
-            <div className='logo-container'>Hanna Senichava</div>
-            <button type='button' className='toggle-btn'>
-            <AiOutlineMenu></AiOutlineMenu>
-            </button>
-            <div className='menu-container'>
-                    <Link className='menu-links' to='/'>
-                        Home
-                    </Link>
-                    <Link className='menu-links' to='/about'>
-                        About
-                    </Link>
-                    <Link className='menu-links' to='/projects'>
-                        Projects
-                    </Link>
-                    <Link className='menu-links' to='/contact'>
-                        Contact
-                    </Link>
-             </div>
-        </div>
-    )
+        <>
+            <nav className='navbar'>
+                <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+                    Hanna
+                </Link>
+                <div className='menu-icon' onClick={handleClick}>
+                    <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+                </div>
+                <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                    <li className='nav-item'>
+                        <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                            Home
+            </Link>
+                    </li>
+                    <li
+                        className='nav-item'
+                        onMouseEnter={onMouseEnter}
+                        onMouseLeave={onMouseLeave}
+                    >
+                        <Link
+                            to='/about'
+                            className='nav-links'
+                            onClick={closeMobileMenu}
+                        >
+                            About 
+                        </Link>
+                        {dropdown && <Dropdown />}
+                    </li>
+                    <li className='nav-item'>
+                        <Link
+                            to='/projects'
+                            className='nav-links'
+                            onClick={closeMobileMenu}
+                        >
+                            Projects
+            </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link
+                            to='/contact'
+                            className='nav-links'
+                            onClick={closeMobileMenu}
+                        >
+                            Contact
+            </Link>
+                    </li>
+                </ul>
+            </nav>
+        </>
+    );
 }
 
-export default Navbar
+export default Navbar;
